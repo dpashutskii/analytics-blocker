@@ -1,0 +1,10 @@
+# Chrome MV3 generated files
+_metadata/
+
+# macOS
+.DS_Store
+
+# Archives (if you export or package the extension)
+*.zip
+*.crx
+

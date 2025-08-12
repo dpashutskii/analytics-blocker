@@ -28,11 +28,7 @@
   ],
   "content_scripts": [
     {
-      "matches": [
-        "https://www.youtube.com/*",
-        "https://youtube.com/*",
-        "https://studio.youtube.com/*"
-      ],
+      "matches": ["https://studio.youtube.com/*"],
       "js": ["content.js"],
       "css": ["content.css"],
       "run_at": "document_start"

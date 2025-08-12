@@ -6,7 +6,7 @@ Blocks YouTube Analytics pages so they don't distract you.
 
 1. Open Chrome and go to `chrome://extensions`.
 2. Enable "Developer mode" (top-right).
-3. Click "Load unpacked" and select this folder: `/Users/dpashutskii/projects/analytics-blocker`.
+3. Click "Load unpacked" and select the folder: `analytics-blocker`.
 4. Visit any YouTube Analytics URLs (e.g., `https://studio.youtube.com/`) – you should be redirected to a simple blocked page.
 
 ## How it works

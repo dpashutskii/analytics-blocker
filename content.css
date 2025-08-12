@@ -1,2 +1,34 @@
-/* Placeholder for future CSS to hide analytics entry points on YouTube UI */
+/* Hide distracting sections in YouTube Studio */
+
+/* Dashboard: Latest video performance card */
+ytcd-card[test-id="channel-dashboard-snapshot-card"] {
+  display: none !important;
+}
+
+/* Dashboard: Channel analytics card */
+ytcd-card[test-id="channel-dashboard-facts-card"] {
+  display: none !important;
+}
+
+/* Dashboard: Published videos card */
+ytcd-card[test-id="channel-dashboard-recent-videos-card"] {
+  display: none !important;
+}
+
+/* Fallbacks if card internals appear outside the card host (unlikely) */
+#video-snapshot,
+#analytics-section,
+#metrics-table {
+  display: none !important;
+}
+
+/* Nav: hide Analytics menu link in the Studio sidebar */
+ytcp-navigation-drawer a.menu-item-link[href*="/analytics/"] {
+  display: none !important;
+}
+
+/* Also hide the parent li that contains the analytics link (modern browsers support :has) */
+ytcp-navigation-drawer li[role="presentation"]:has(a.menu-item-link[href*="/analytics/"]) {
+  display: none !important;
+}
 
