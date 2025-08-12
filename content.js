@@ -15,21 +15,6 @@
         el.style.setProperty('display', 'none', 'important');
       }
       el.setAttribute('data-analytics-blocker-hidden', 'true');
-
-      // If this is the Analytics nav link, also hide its parent <li>
-      if (
-        el instanceof Element &&
-        el.tagName === 'A' &&
-        el.matches('a.menu-item-link[href*="/analytics/"]')
-      ) {
-        const parentLi = el.closest('li[role="presentation"]');
-        if (parentLi) {
-          parentLi.setAttribute('data-analytics-blocker-hidden', 'true');
-          if (parentLi.style.display !== 'none') {
-            parentLi.style.setProperty('display', 'none', 'important');
-          }
-        }
-      }
     } catch (_) {
       // ignore
     }
