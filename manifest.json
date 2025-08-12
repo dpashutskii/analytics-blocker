@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Analytics Blocker",
+  "version": "0.1.0",
+  "description": "Blocks YouTube Analytics pages to reduce distraction.",
+  "permissions": [
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "https://studio.youtube.com/*",
+    "https://www.youtube.com/*",
+    "https://youtube.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://youtube.com/*",
+        "https://studio.youtube.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "YouTube Analytics Blocker"
+  }
+}
+
