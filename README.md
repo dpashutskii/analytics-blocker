@@ -1,31 +1,36 @@
-# YouTube Analytics Blocker (MV3)
+# Focus Blocker for Creators (MV3)
 
-Blocks distracting YouTube Analytics while keeping Studio usable.
+Chrome extension that blocks analytics-heavy pages and hides vanity-metric UI so creators can stay focused on shipping.
 
-## Load the extension locally
+## What you can customize
 
-1. Open Chrome and go to `chrome://extensions`.
-2. Enable "Developer mode" (top-right).
-3. Click "Load unpacked" and select the folder: `analytics-blocker`.
-4. Refresh `https://studio.youtube.com/`.
+From the popup (main controls):
+- Turn Focus Mode on/off.
+- YouTube Studio:
+  - Block Studio Analytics pages.
+  - Hide dashboard metric cards.
+  - Hide Analytics link in Studio sidebar.
+- YouTube:
+  - Block analytics URLs.
+  - Hide public view counts.
 
-## What is blocked/hidden
+From Advanced Settings page:
+- Customize blocked-page title and message.
+- Reset all settings to defaults.
 
-- Hidden on Studio dashboard (via content script):
-  - Latest video performance card (`ytcd-card[test-id="channel-dashboard-snapshot-card"]`)
-  - Channel analytics card (`ytcd-card[test-id="channel-dashboard-facts-card"]`)
-  - Published videos card (`ytcd-card[test-id="channel-dashboard-recent-videos-card"]`)
-  - Analytics sidebar link (and its parent list item)
-- Redirected pages (via `rules.json` → `blocked.html`):
-  - `https://studio.youtube.com/*/analytics*`
-  - `https://www.youtube.com/analytics*`
-  - `https://www.youtube.com/*/analytics*`
+## Load locally
 
-Notes:
-- The content script uses a MutationObserver to keep these elements hidden as Studio updates dynamically.
-- Temporarily need analytics? Disable the extension from `chrome://extensions` and reload, or we can add a toggle action.
+1. Open `chrome://extensions`.
+2. Enable Developer mode.
+3. Click Load unpacked and select this folder.
+4. Pin the extension and configure features from popup.
 
-## Extend
+## Project structure
 
-- Add or remove selectors in `content.js`/`content.css` to tune what’s hidden.
-- Add more redirect rules in `rules.json` if needed. Reload the extension after changes.
+- `manifest.json`: MV3 manifest.
+- `config.js`: default settings, selectors, and redirect templates.
+- `background.js`: dynamic DNR rule management.
+- `content.js`: applies hide rules from settings.
+- `popup.*`: primary user controls.
+- `options.*`: advanced settings.
+- `blocked.*`: focus page shown when blocked pages are opened.

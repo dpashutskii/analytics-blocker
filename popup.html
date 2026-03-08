@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Blocker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header>
+        <h1>Focus Blocker</h1>
+        <p id="status" class="status">Loading...</p>
+      </header>
+
+      <section class="group">
+        <h2>Global</h2>
+        <label class="toggle-row">
+          <input id="enabled" type="checkbox" />
+          <span>Focus mode enabled</span>
+        </label>
+        <label class="feature-row">
+          <input id="globalHideMetricNumbers" type="checkbox" />
+          <span>Hide views/likes/comments numbers everywhere</span>
+        </label>
+      </section>
+
+      <section class="group">
+        <h2>Studio: Block Access</h2>
+        <label class="feature-row">
+          <input id="studioBlockAnalytics" type="checkbox" />
+          <span>Block Studio Analytics pages</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideNav" type="checkbox" />
+          <span>Hide Analytics in Studio sidebar</span>
+        </label>
+      </section>
+
+      <section class="group">
+        <h2>Studio: Dashboard Cards</h2>
+        <label class="feature-row">
+          <input id="studioHideLatestVideoCard" type="checkbox" />
+          <span>Latest video performance card</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideChannelAnalyticsCard" type="checkbox" />
+          <span>Channel analytics card</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHidePublishedVideosCard" type="checkbox" />
+          <span>Published videos card</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideCommunityCard" type="checkbox" />
+          <span>Community post card</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideCommentsCard" type="checkbox" />
+          <span>Comments card</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideRecentSubscribersCard" type="checkbox" />
+          <span>Recent subscribers card</span>
+        </label>
+      </section>
+
+      <section class="group">
+        <h2>Studio: Dashboard Details</h2>
+        <label class="feature-row">
+          <input id="studioHideVideoRowMetrics" type="checkbox" />
+          <span>Hide row metrics in video lists</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHidePostStats" type="checkbox" />
+          <span>Hide community post stats</span>
+        </label>
+      </section>
+
+      <section class="group">
+        <h2>Studio: Content / Comments / Analytics Pages</h2>
+        <label class="feature-row">
+          <input id="studioHideContentMetricColumns" type="checkbox" />
+          <span>Hide views/comments/likes columns on Content page</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideCommentsInboxThreads" type="checkbox" />
+          <span>Hide comments list in Comments inbox</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideCommentActionButtons" type="checkbox" />
+          <span>Hide reply/like/heart action buttons in comments</span>
+        </label>
+        <label class="feature-row">
+          <input id="studioHideAnalyticsPageCards" type="checkbox" />
+          <span>Hide key cards on Analytics pages</span>
+        </label>
+      </section>
+
+      <section class="group">
+        <h2>YouTube</h2>
+        <label class="feature-row">
+          <input id="youtubeBlockAnalytics" type="checkbox" />
+          <span>Block YouTube Analytics URLs</span>
+        </label>
+        <label class="feature-row">
+          <input id="youtubeHideViews" type="checkbox" />
+          <span>Hide public view counts</span>
+        </label>
+      </section>
+
+      <div class="actions">
+        <button id="openOptions" type="button" class="secondary">Advanced settings</button>
+        <span id="saveState" aria-live="polite"></span>
+      </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

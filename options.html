@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Blocker Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <h1>Advanced Settings</h1>
+      <p>Use popup for daily controls. This page is for less-frequent setup.</p>
+
+      <form id="settingsForm">
+        <section>
+          <h2>Blocked Page Copy</h2>
+          <p class="hint">Customize the message shown when an analytics page is blocked.</p>
+          <label>
+            Title
+            <input type="text" id="blockedTitle" maxlength="80" />
+          </label>
+          <label>
+            Message
+            <textarea id="blockedMessage" rows="4" maxlength="220"></textarea>
+          </label>
+        </section>
+
+        <div class="actions">
+          <button type="submit">Save</button>
+          <button id="resetDefaults" type="button" class="secondary">Reset defaults</button>
+          <span id="savedState" aria-live="polite"></span>
+        </div>
+      </form>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

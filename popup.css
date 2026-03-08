@@ -1,0 +1,78 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  width: 370px;
+  max-height: 600px;
+  overflow: auto;
+  background: #f6f8fd;
+  color: #13203b;
+}
+
+.panel {
+  padding: 12px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.status {
+  margin: 4px 0 12px;
+  font-size: 12px;
+  color: #4b5f8b;
+}
+
+.group {
+  background: #fff;
+  border: 1px solid #dce3f1;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.group h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #2b3c62;
+}
+
+.toggle-row,
+.feature-row {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  gap: 8px;
+  margin: 7px 0;
+  font-size: 13px;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  background: #f6f8fd;
+  padding-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #e7ecf8;
+  color: #1f2a44;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#saveState {
+  font-size: 12px;
+  color: #3f7a2a;
+}

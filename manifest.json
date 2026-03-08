@@ -1,41 +1,34 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Analytics Blocker",
-  "version": "0.1.0",
-  "description": "Blocks YouTube Analytics pages to reduce distraction.",
-  "permissions": [
-    "declarativeNetRequest"
-  ],
+  "name": "Focus Blocker for Creators",
+  "version": "0.2.0",
+  "description": "Block vanity-metric pages and UI elements so you can stay focused on creating.",
+  "permissions": ["declarativeNetRequest", "storage"],
   "host_permissions": [
     "https://studio.youtube.com/*",
     "https://www.youtube.com/*",
     "https://youtube.com/*"
   ],
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "ruleset_1",
-        "enabled": true,
-        "path": "rules.json"
-      }
-    ]
+  "background": {
+    "service_worker": "background.js"
   },
+  "options_page": "options.html",
   "web_accessible_resources": [
     {
-      "resources": ["blocked.html"],
+      "resources": ["blocked.html", "blocked.css", "blocked.js", "config.js"],
       "matches": ["<all_urls>"]
     }
   ],
   "content_scripts": [
     {
-      "matches": ["https://studio.youtube.com/*"],
-      "js": ["content.js"],
+      "matches": ["https://studio.youtube.com/*", "https://www.youtube.com/*", "https://youtube.com/*"],
+      "js": ["config.js", "content.js"],
       "css": ["content.css"],
       "run_at": "document_start"
     }
   ],
   "action": {
-    "default_title": "YouTube Analytics Blocker"
+    "default_title": "Focus Blocker",
+    "default_popup": "popup.html"
   }
 }
-

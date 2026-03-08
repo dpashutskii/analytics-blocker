@@ -1,55 +1,96 @@
-// Hides specific distracting sections on YouTube Studio without blocking the page
-
 (function init() {
-  const TARGET_SELECTORS = [
-    'ytcd-card[test-id="channel-dashboard-snapshot-card"]',
-    'ytcd-card[test-id="channel-dashboard-facts-card"]',
-    'ytcd-card[test-id="channel-dashboard-recent-videos-card"]',
-    'ytcp-navigation-drawer a.menu-item-link[href*="/analytics/"]',
-  ];
+  const { STORAGE_KEY_SETTINGS, HIDE_SELECTORS, normalizeSettings } =
+    globalThis.AnalyticsBlockerConfig;
 
-  const hideElement = (el) => {
-    try {
-      if (!el) return;
-      if (el.style && el.style.display !== 'none') {
-        el.style.setProperty('display', 'none', 'important');
-      }
-      el.setAttribute('data-analytics-blocker-hidden', 'true');
-    } catch (_) {
-      // ignore
+  const STYLE_ID = 'ab-focus-style';
+
+  function getSiteKey(hostname) {
+    if (hostname === 'studio.youtube.com') return 'youtubeStudio';
+    if (hostname === 'www.youtube.com' || hostname === 'youtube.com') return 'youtube';
+    return null;
+  }
+
+  function shouldApplyHideRules(settings, siteKey) {
+    if (!siteKey) return false;
+    if (!settings.enabled) return false;
+    return true;
+  }
+
+  function collectEnabledSelectors(selectorMap, settingValues) {
+    const selectors = [];
+    for (const [settingKey, values] of Object.entries(selectorMap || {})) {
+      if (!settingValues[settingKey]) continue;
+      selectors.push(...values);
     }
-  };
+    return selectors;
+  }
 
-  const hideTargets = (root = document) => {
-    for (const selector of TARGET_SELECTORS) {
-      const nodes = root.querySelectorAll(selector);
-      for (const node of nodes) hideElement(node);
+  function buildHideCss(settings, siteKey) {
+    const globalSelectors = collectEnabledSelectors(
+      HIDE_SELECTORS.global,
+      settings.sites.global || {}
+    );
+
+    const siteSelectors = collectEnabledSelectors(
+      HIDE_SELECTORS[siteKey],
+      settings.sites[siteKey] || {}
+    );
+
+    const selectors = [...new Set([...globalSelectors, ...siteSelectors])];
+    if (!selectors.length) {
+      return '';
     }
-  };
 
-  // Initial attempt (in case elements are already present)
-  hideTargets();
+    return `${selectors.join(',\n')} { display: none !important; }`;
+  }
 
-  // Observe SPA updates and late-loaded content
-  const observer = new MutationObserver((mutations) => {
-    for (const m of mutations) {
-      if (m.type === 'childList') {
-        for (const added of m.addedNodes) {
-          if (!(added instanceof Element)) continue;
-          hideTargets(added);
-        }
-      }
-      if (m.type === 'attributes') {
-        const target = m.target;
-        if (target instanceof Element) hideTargets(target);
-      }
+  function removeManagedStyle() {
+    const existing = document.getElementById(STYLE_ID);
+    if (existing) {
+      existing.remove();
+    }
+  }
+
+  function upsertManagedStyle(cssText) {
+    if (!cssText) {
+      removeManagedStyle();
+      return;
+    }
+
+    let style = document.getElementById(STYLE_ID);
+    if (!style) {
+      style = document.createElement('style');
+      style.id = STYLE_ID;
+      document.documentElement.appendChild(style);
+    }
+
+    if (style.textContent !== cssText) {
+      style.textContent = cssText;
+    }
+  }
+
+  async function refresh() {
+    const syncData = await chrome.storage.sync.get(STORAGE_KEY_SETTINGS);
+    const settings = normalizeSettings(syncData[STORAGE_KEY_SETTINGS]);
+    const siteKey = getSiteKey(location.hostname);
+
+    if (!shouldApplyHideRules(settings, siteKey)) {
+      removeManagedStyle();
+      return;
+    }
+
+    upsertManagedStyle(buildHideCss(settings, siteKey));
+  }
+
+  chrome.storage.onChanged.addListener((changes) => {
+    if (changes[STORAGE_KEY_SETTINGS]) {
+      refresh().catch(() => {
+        // Ignore transient errors from extension lifecycle.
+      });
     }
   });
 
-  observer.observe(document.documentElement || document, {
-    subtree: true,
-    childList: true,
-    attributes: true,
+  refresh().catch(() => {
+    // Ignore transient errors from extension lifecycle.
   });
 })();
-

@@ -1,53 +1,23 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blocked</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-        color: #111;
-        background: #fafafa;
-      }
-      .wrap {
-        min-height: 100%;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-      }
-      .card {
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 24px 28px;
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-        max-width: 520px;
-      }
-      h1 { font-size: 20px; margin: 0 0 8px; }
-      p { margin: 0 0 16px; line-height: 1.5; }
-      .tip { color: #6b7280; font-size: 14px; }
-      a.btn {
-        display: inline-block;
-        background: #111827;
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 14px;
-        border-radius: 8px;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics blocked</title>
+    <link rel="stylesheet" href="blocked.css" />
   </head>
   <body>
-    <main class="wrap">
-      <section class="card">
-        <h1>YouTube Analytics is blocked</h1>
-        <p>Stay focused. You can change or disable this extension anytime from the Extensions page.</p>
-        <p class="tip">Manage at chrome://extensions</p>
-        <a class="btn" href="https://www.youtube.com" rel="noreferrer">Go to YouTube Home</a>
-      </section>
+    <main class="card">
+      <p class="eyebrow">Focus mode</p>
+      <h1 id="title">Analytics blocked</h1>
+      <p id="message">This page is blocked to protect your focus.</p>
+      <div class="actions">
+        <button id="back" type="button" class="ghost">Go back</button>
+      </div>
+      <button id="openOptions" type="button" class="link">Advanced settings</button>
     </main>
-  </body>
-  </html>
 
+    <script src="config.js"></script>
+    <script src="blocked.js"></script>
+  </body>
+</html>
